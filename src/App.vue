@@ -26,8 +26,9 @@ const [todoList, todos] = useDragAndDrop(todoItems, {
   group: "todoList",
   sortable: false,
   draggingClass: "bg-blue-200 text-white",
+  dropZoneClass: "bg-blue-200 text-white", // ! Doesn't work when enter on DropZone
   handleEnd: (event) => {
-    // console.log('Elemento soltado:', event)
+    // console.log('Element dragged:', event)
   },
 });
 
@@ -40,8 +41,8 @@ const [doneList, dones] = useDragAndDrop(doneItems, {
     if (draggedItem) {
       const container = event.currentParent?.el;
       if (container) {
-        console.log("Ejercicio recibido:", draggedItem);
-        doneItems.push({ ...draggedItem.value });
+        console.log("Element droped:", draggedItem.value);
+        doneItems.push(draggedItem.value);
       }
     }
   },
