@@ -1,20 +1,9 @@
 <script setup lang="ts">
+import Days from "./components/Days.vue";
 import { useDragAndDrop } from "@formkit/drag-and-drop/vue";
-import { onMounted, ref, reactive } from "vue";
+import { onMounted } from "vue";
 
-const plan = ref({
-  days: [
-    {
-      name: "Day 1",
-      todos: [],
-    },
-    {
-      name: "Day 2",
-      todos: [],
-    },
-  ],
-});
-
+<<<<<<< Updated upstream
 const todoItems = [
   "Make Test",
   "Make Controllers",
@@ -31,6 +20,9 @@ const todoItems = [
   "Todo Task 10",
 ];
 const doneItems = reactive([]);
+=======
+const todoItems = ["Make Test", "Make Controllers", "Deploy Project"];
+>>>>>>> Stashed changes
 
 onMounted(async () => {
   todoItems;
@@ -39,6 +31,7 @@ onMounted(async () => {
 const [todoList, todos] = useDragAndDrop(todoItems, {
   group: "todoList",
   sortable: false,
+<<<<<<< Updated upstream
   selectedClass: "bg-blue-200 text-white",
   draggingClass: "bg-blue-200 text-white", // ! Doesn't work when enter on DropZone
   handleEnd: (event) => {
@@ -71,10 +64,15 @@ const addDay = () => {
     todos: [],
   });
 };
+=======
+  draggingClass: "bg-blue-200 text-white",
+});
+>>>>>>> Stashed changes
 </script>
 
 <template>
   <div class="py-10 px-20">
+<<<<<<< Updated upstream
     <div class="flex items-center justify-end">
       <button
         class="bg-blue-500/40 rounded-full px-3 py-1 mb-10"
@@ -88,6 +86,11 @@ const addDay = () => {
         class="max-h-[650px] overflow-y-auto rounded-xl p-8 border-2 border-dashed"
       >
         <ul ref="todoList">
+=======
+    <div class="grid gap-10 grid-cols-2">
+      <div class="max-h-[550px] overflow-y-auto bg-white rounded-xl p-10">
+        <ul ref="todoList" class="my-10">
+>>>>>>> Stashed changes
           <li
             v-for="todo in todos"
             :key="todo"
@@ -97,30 +100,7 @@ const addDay = () => {
           </li>
         </ul>
       </div>
-      <ul
-        ref="doneList"
-        class="p-8 border-2 border-dashed min-h-[150px] rounded-lg space-y-3"
-      >
-        <li
-          v-for="day in plan?.days"
-          :key="day.name"
-          class="flex flex-col p-4 bg-gray-200 border border-gray-300 rounded"
-        >
-          <span> {{ day.name }}</span>
-          <h1 class="font-bold">TODO'S</h1>
-          <ul
-            class="p-8 border-2 border-dashed min-h-[150px] rounded-lg space-y-3"
-          >
-            <li
-              v-for="dayTodo in day.todos"
-              :key="dayTodo"
-              class="p-4 bg-gray-200 border border-gray-300 rounded"
-            >
-              <span> {{ dayTodo }}</span>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <Days />
     </div>
   </div>
 </template>
