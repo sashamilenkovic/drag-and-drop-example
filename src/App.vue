@@ -15,7 +15,21 @@ const plan = ref({
   ],
 });
 
-const todoItems = ["Make Test", "Make Controllers", "Deploy Project"];
+const todoItems = [
+  "Make Test",
+  "Make Controllers",
+  "Deploy Project",
+  "Todo Task 1",
+  "Todo Task 2",
+  "Todo Task 3",
+  "Todo Task 4",
+  "Todo Task 5",
+  "Todo Task 6",
+  "Todo Task 7",
+  "Todo Task 8",
+  "Todo Task 9",
+  "Todo Task 10",
+];
 const doneItems = reactive([]);
 
 onMounted(async () => {
@@ -25,8 +39,8 @@ onMounted(async () => {
 const [todoList, todos] = useDragAndDrop(todoItems, {
   group: "todoList",
   sortable: false,
-  draggingClass: "bg-blue-200 text-white",
-  dropZoneClass: "bg-blue-200 text-white", // ! Doesn't work when enter on DropZone
+  selectedClass: "bg-blue-200 text-white",
+  draggingClass: "bg-blue-200 text-white", // ! Doesn't work when enter on DropZone
   handleEnd: (event) => {
     // console.log('Element dragged:', event)
   },
@@ -40,6 +54,10 @@ const [doneList, dones] = useDragAndDrop(doneItems, {
     const draggedItem = event.draggedNode?.data;
     if (draggedItem) {
       const container = event.currentParent?.el;
+      console.log(event);
+
+      console.log(container);
+
       if (container) {
         console.log("Element droped:", draggedItem.value);
         doneItems.push(draggedItem.value);
@@ -65,13 +83,15 @@ const addDay = () => {
         Add day
       </button>
     </div>
-    <div class="grid gap-10 grid-cols-2">
-      <div class="max-h-[550px] overflow-y-auto bg-white rounded-xl p-10">
-        <ul ref="todoList" class="my-10">
+    <div class="grid gap-10 grid-cols-2 items-start">
+      <div
+        class="max-h-[650px] overflow-y-auto rounded-xl p-8 border-2 border-dashed"
+      >
+        <ul ref="todoList">
           <li
             v-for="todo in todos"
             :key="todo"
-            class="p-4 bg-gray-200 border border-gray-300 rounded cursor-grab mb-2 last:mb-0"
+            class="p-4 border bg-gray-200 border-gray-300 rounded cursor-grab mb-2 last:mb-0"
           >
             {{ todo }}
           </li>
